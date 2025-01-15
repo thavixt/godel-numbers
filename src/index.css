@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply text-gray-600 bg-stone-100;
+}
+
+a {
+  @apply text-blue-500;
+}
+a:hover {
+  @apply underline;
+}
+
+button {
+  @apply rounded bg-orange-100 hover:bg-orange-300 hover:text-white px-4 py-2 focus:outline-none;
+}
+
+code, textarea {
+  @apply font-mono text-black;
+}
+code {
+  @apply font-semibold;
+}
+
+textarea {
+  resize: none;
+}

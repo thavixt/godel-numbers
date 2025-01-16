@@ -24,6 +24,11 @@ export const GödelEncoding: Record<string, GödelEncodingMember> = {
 };
 
 export const getGödelSymbol = (number: number) => {
+  const validIndex = Object.keys(GödelEncoding).includes(number.toString());
+  if (!validIndex) {
+    console.error("Invalid Gödel number: " + number);
+    return '-';
+  }
   return GödelEncoding[number].symbol;
 };
 

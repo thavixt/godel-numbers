@@ -6,9 +6,9 @@ import { GödelNumberInput } from './components/Input'
 
 function App() {
   return (
-    <div className="p-4 flex flex-col container mx-auto">
+    <div className="p-4 flex flex-col container mx-auto space-y-4">
 
-      <div className="flex flex-col items-center justify-center p-8">
+      <div className="flex flex-col items-center justify-center">
         <h1 className='text-5xl p-4 font-serif'>Kurt Gödel's Incompleteness Theorems</h1>
         <p>
           a demonstration of
@@ -25,11 +25,10 @@ function App() {
           <GödelEncodingTable />
         </div>
 
-        <div className="flex flex-col space-y-4 items-center justify-center max-w-[900px]">
+        <div className="flex flex-col space-y-4 items-center justify-center max-w-[600px]">
           <div>
             <p>Unfortunately, these Gödel numbers get <b>really</b> big - so, this is just a showcase.</p>
-            <p>For a trivial example, try the expression <code><b>0=0</b></code> (zero equals zero)</p>
-            <p>... then input the resulting Gödel number and retrieve the original expression.</p>
+            <p>For a trivial example, try the expression <code><b>0=0</b></code> (zero equals zero), then input the resulting <i>Gödel value</i> at the bottom, then press <i>Clear</i> and <i>Decode</i> to retrieve the original expression.</p>
           </div>
           <div className="flex flex-col space-y-4 items-center justify-center">
             <p>Input a mathematical expression by clicking on the symbols in the list:</p>
@@ -43,8 +42,9 @@ function App() {
         </div>
       </div>
 
-      <footer className='pt-10 pb-4 flex flex-col place-items-center'>
-        <div><a href="https://github.com/thavixt" target='__blank'>github</a></div>
+      <footer className='flex flex-col place-items-center'>
+        <div>Made by <a href="https://github.com/thavixt" target='__blank'>thavixt@github</a></div>
+        <div><p>Based on <a href="https://www.youtube.com/watch?v=HeQX2HjkcNo" target='__blank'>Math's Fundamental Flaw - Veritasium (YouTube link)</a></p></div>
       </footer>
     </div>
   )

@@ -1,6 +1,48 @@
-/**
- * Generates and logs the first `n` prime numbers.
- */
+import { getGödelSymbol } from "../components/Encoding";
+
+export const PRIMES_100 = getPrimeNumbers(100);
+
+export function calculateGödelNumber(gödelNumbers: number[]) {
+  const values = gödelNumbers.map((v, i) => PRIMES_100[i] ** v);
+  return values.reduce((a, b) => a * b, 1);
+}
+
+/** Retrieve the original Gödel numbers by prime factorization */
+export function getGödelNumbers(gödelNumber: number): number[] {
+  const primeFactors = primeFactorsOf(gödelNumber);
+  const primeExponents = getPrimeExponents(primeFactors);
+  console.info(gödelNumber, primeExponents);
+
+  return Object.values(primeExponents).map(Number);
+}
+
+export function primeFactorsOf(num: number) {
+  if (num > 10 ** 10) {
+    console.error("Number too big", num);
+    alert(`Number too big (${num})\nPlease try with a smaller Gödel number (> 10^10)`);
+    return [];
+  }
+  let result: number[] = [];
+  let primeIndex = 0;
+  for (let i = 2; i <= num; i++) {
+    let prime = PRIMES_100[primeIndex];
+    while (num % prime === 0) {
+      result.push(prime);
+      num = num / prime;
+    }
+    primeIndex++;
+  }
+  return result;
+}
+
+export function getPrimeExponents(primes: number[]) {
+  return primes.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), {} as Record<number, number>);
+}
+
+export function getGödelSymbols(gödelNumbers: number[]) {
+  return gödelNumbers.map(getGödelSymbol);
+}
+
 function getPrimeNumbers(n: number) {
   let arr = [];
   let x = 2;
@@ -17,48 +59,4 @@ function getPrimeNumbers(n: number) {
     x++;
   }
   return arr;
-}
-
-export const PRIMES = getPrimeNumbers(100);
-
-export function calculateGödelNumber(gödelNumbers: number[]) {
-  const values = gödelNumbers.map((v, i) => PRIMES[i] ** v);
-  console.log(gödelNumbers);
-  console.log(values);
-  return values.reduce((a, b) => a * b, 1);
-}
-
-function getPrimeFactors(n: number) {
-  const factors = [];
-  let divisor = 2;
-
-  while (n >= 2) {
-    if (n % divisor == 0) {
-      factors.push(divisor);
-      n = n / divisor;
-    } else {
-      divisor++;
-    }
-  }
-  console.log("factors", factors)
-  return factors;
-}
-
-/** Retrieve the original Gödel numbers by prime factorization */
-export function getGödelNumbers(gödelNumber: number): number[] {
-  console.log('--- gödel number:', gödelNumber);
-  const primeFactors = getPrimeFactors(gödelNumber);
-  console.log("factors", primeFactors)
-  const occ = getOccurrences(primeFactors);
-  console.log("getOccurrences", occ);
-  return occ;
-}
-
-// [2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 5, 5, 5, 5, 5, 5]
-function getOccurrences(numberList: number[]): number[] {
-  const freq = numberList.reduce(function (acc, curr) {
-    return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
-  }, {} as Record<number, number>);
-  
-  return Object.values(freq);  
 }
